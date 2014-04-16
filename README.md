@@ -8,10 +8,7 @@ Usage
 =======
 
 	rake
-to generate parser source code Testlang::Parser
-
-	rake test
-to get compiled bin 'test'
+to generate parser source code Testlang::Parser and to get compiled bin 'test'
 
 Licence
 =======
