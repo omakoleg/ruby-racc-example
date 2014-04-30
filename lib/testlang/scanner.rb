@@ -1,23 +1,22 @@
 module Testlang
   module Scanner
     def self.scan(source)
+      source = source.strip
       tokens = []
-      while !source.empty?
+      until source.empty?
         case source
-        when /\A[a-zA-Z_][a-zA-Z0-9_]*/
-          tokens << [:ID, $&]
-          source.slice!(0, $&.size)
-        when /\A[\(\)]/
-          tokens << [$&, $&]
-          source[0] = ''
         when /\A\s+/
-          source.slice!(0, $&.size)
+          source = $'
+        when /\A\w+/
+          tokens.push [:ITEM, $&]
+          source = $'
         else
-          STDERR.puts "Unknown input at #{source[0..10]}"
-          exit 1
+          c = source[0,1]
+          tokens.push [c, c]
+          source = source[1..-1]
         end
       end
-      
+      tokens.push [false, '$']
       tokens
     end
   end

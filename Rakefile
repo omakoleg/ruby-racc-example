@@ -10,4 +10,4 @@ task "test" => "compile" do
   sh "gcc -o test test.c"
 end
 
-task :default => "test"
+task :default => "lib/testlang/parser.rb"

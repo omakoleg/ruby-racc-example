@@ -1,13 +1,26 @@
 class Testlang::Parser
 
 rule
-call : ID '(' ')' { 
-  result = [:script, [:call, val[0]]]
-}
 
-end
+array   : '[' contents ']'
+            {
+              result = val[1]
+            }
+        | '[' ']'
+            {
+              result = []
+            }
 
----- inner ----
+contents: ITEM
+            {
+              result = val
+            }
+        | contents ',' ITEM
+            {
+              result.push val[2]
+            }
+
+---- inner
   def parse(tokens)
     @tokens = tokens
 	
